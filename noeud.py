@@ -3,7 +3,9 @@ import matplotlib.pyplot as plt
 
 class Noeud:
     # 1
+    """Représente un noeud d'un arbre d'expression mathématique, pouvant être une valeur, une variable ou un opérateur."""
     def __init__(self, valeur, enfants=None):
+
         self.valeur = valeur
         # Si on ne donne pas d'enfants, on crée une liste vide
         if enfants is None:
@@ -14,10 +16,12 @@ class Noeud:
 
     # 2
     def ajouter_enfant(self, noeud_enfant):
+        """Ajoute un noeud à la liste des enfants de ce noeud."""
         self.enfants.append(noeud_enfant)
 
     # 3
     def afficher_polonais(self):
+        """Retourne une chaîne de caractères représentant l'expression en notation polonaise."""
         resultat = str(self.valeur)
         for enfant in self.enfants:
             resultat += " " + enfant.afficher_polonais()
@@ -26,6 +30,7 @@ class Noeud:
      # 5
     def evaluer(self, variables):
         # Cas 1 : Le noeud n'a pas d'enfant. C'est donc un chiffre ou une lettre (x, y)
+        """Évalue récursivement l'expression symbolique à partir d'un dictionnaire de valeurs de variables, et retourne un nombre flottant."""
         if not self.enfants:
             if isinstance(self.valeur, (int, float)):
                 return float(self.valeur)
@@ -45,6 +50,7 @@ class Noeud:
 
     # 6
     def tracer(self, variable, valeurs):
+        """Trace, avec matplotlib, la courbe de l'expression en fonction des valeurs données pour une variable."""
         y_valeurs = []
         for val in valeurs:
             # On calcule le résultat pour chaque valeur et on le stocke
